@@ -41,16 +41,17 @@ public class EletrodomesticoService {
         return eletrodomesticoMapper.toDTO(eletrodomesticoCadastrado);
     }
 
-    public Eletrodomestico atualizar(Long id, EletrodomesticoDTO eletrodomesticoDTO) {
+    public EletrodomesticoDTO atualizar(Long id, Eletrodomestico eletrodomesticoDTO) {
         try {
-            Eletrodomestico buscaEletrodomestico = repository.findById(id).orElseThrow(() -> new ControllerNotFoundException("Eletrodoméstico não encontrado"));
-            buscaEletrodomestico.setNome(eletrodomesticoDTO.getNome());
-            buscaEletrodomestico.setModelo(eletrodomesticoDTO.getModelo());
-            buscaEletrodomestico.setPotencia(eletrodomesticoDTO.getPotencia());
-            buscaEletrodomestico.setVoltagem(eletrodomesticoDTO.getVoltagem());
-            buscaEletrodomestico = repository.save(buscaEletrodomestico);
+            Eletrodomestico eletrodomesticoBuscado = repository.findById(id).orElseThrow(() -> new ControllerNotFoundException("Eletrodoméstico não encontrado"));
+            eletrodomesticoBuscado.setNome(eletrodomesticoDTO.getNome());
+            eletrodomesticoBuscado.setModelo(eletrodomesticoDTO.getModelo());
+            eletrodomesticoBuscado.setPotencia(eletrodomesticoDTO.getPotencia());
+            eletrodomesticoBuscado.setVoltagem(eletrodomesticoDTO.getVoltagem());
+            eletrodomesticoBuscado = repository.save(eletrodomesticoBuscado);
 
-            return buscaEletrodomestico;
+
+            return eletrodomesticoMapper.toDTO (eletrodomesticoBuscado);
         } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException("Eletrodoméstico não encontrado, id:" + id);
         }

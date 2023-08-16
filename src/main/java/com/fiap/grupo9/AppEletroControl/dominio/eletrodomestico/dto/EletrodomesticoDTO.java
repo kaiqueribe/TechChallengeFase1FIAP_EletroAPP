@@ -11,7 +11,8 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EletrodomesticoDTO {
+public class EletrodomesticoDTO
+{
 
     private Long id;
     private String nome;

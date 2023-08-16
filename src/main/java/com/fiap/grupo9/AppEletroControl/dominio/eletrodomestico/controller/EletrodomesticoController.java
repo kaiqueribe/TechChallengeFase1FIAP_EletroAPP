@@ -39,14 +39,14 @@ public class EletrodomesticoController {
     }
 
     @PostMapping
-    public ResponseEntity<EletrodomesticoDTO> salvar(@RequestBody EletrodomesticoDTO eletrodomestico) {
-        var eletrodomesticoCadastrado = eletrodomesticoService.cadastrar(eletrodomestico);
+    public ResponseEntity<EletrodomesticoDTO> salvar(@RequestBody EletrodomesticoDTO eletrodomesticoDTO) {
+        var eletrodomesticoCadastrado = eletrodomesticoService.cadastrar(eletrodomesticoDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((eletrodomesticoCadastrado.getId())).toUri();
         return ResponseEntity.created(uri).body(eletrodomesticoCadastrado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Eletrodomestico> atualizar(@RequestBody EletrodomesticoDTO eletrodomesticoDTO, @PathVariable Long id) {
+    public ResponseEntity<EletrodomesticoDTO> atualizar(@RequestBody Eletrodomestico eletrodomesticoDTO, @PathVariable Long id) {
         var eletrodomesticoAtualizado = eletrodomesticoService.atualizar(id, eletrodomesticoDTO);
         return ResponseEntity.ok(eletrodomesticoAtualizado);
     }

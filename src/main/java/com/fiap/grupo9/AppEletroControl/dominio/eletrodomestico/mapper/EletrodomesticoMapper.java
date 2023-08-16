@@ -9,6 +9,8 @@ import java.util.List;
 @Mapper
 public interface EletrodomesticoMapper {
     EletrodomesticoDTO toDTO(Eletrodomestico eletrodomestico);
+
     Eletrodomestico toEntity(EletrodomesticoDTO eletrodomesticoDTO);
+
     List<EletrodomesticoDTO> toDTO(List<Eletrodomestico> eletrodomesticos);
 }
