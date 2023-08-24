@@ -29,6 +29,7 @@ public class PessoaDTO {
     @Size(min = 2, max = 50)
     private String nome;
 
+
     @Past
     private LocalDate dataNascimento;
 
