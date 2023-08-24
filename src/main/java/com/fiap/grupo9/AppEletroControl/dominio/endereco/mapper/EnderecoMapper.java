@@ -9,6 +9,6 @@ import java.util.List;
 @Mapper
 public interface EnderecoMapper {
     EnderecoDTO toDTO(Endereco endereco);
-    Endereco toEntity(EnderecoDTO pessoaDTO);
+    Endereco toEntity(EnderecoDTO enderecoDTO);
     List<EnderecoDTO> toDTO(List<Endereco> enderecos);
 }

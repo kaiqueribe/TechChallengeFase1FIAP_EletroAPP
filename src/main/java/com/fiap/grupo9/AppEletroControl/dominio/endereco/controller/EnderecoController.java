@@ -1,12 +1,12 @@
 package com.fiap.grupo9.AppEletroControl.dominio.endereco.controller;
 
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.dto.EnderecoDTO;
-import com.fiap.grupo9.AppEletroControl.dominio.endereco.entitie.Endereco;
+
 import com.fiap.grupo9.AppEletroControl.dominio.endereco.service.EnderecoService;
 
-import com.fiap.grupo9.AppEletroControl.dominio.pessoa.entitie.Pessoa;
+
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/enderecos")
+@Slf4j
 @AllArgsConstructor
 public class EnderecoController {
 
@@ -41,20 +42,20 @@ public class EnderecoController {
     }
 
     @PostMapping
-    public ResponseEntity<EnderecoDTO> salvar(@RequestBody EnderecoDTO endereco) {
-        var enderecoCadastrado = enderecoService.cadastrar(endereco);
+    public ResponseEntity<EnderecoDTO> salvar(@RequestBody EnderecoDTO enderecoDTO) {
+        var enderecoCadastrado = enderecoService.cadastrar(enderecoDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((enderecoCadastrado.getId())).toUri();
         return ResponseEntity.created(uri).body(enderecoCadastrado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Endereco> atualizar(@RequestBody Endereco endereco, @PathVariable Long id) {
-        var enderecoAtualizado = enderecoService.atualizar(id, endereco);
+    public ResponseEntity<EnderecoDTO> atualizar(@RequestBody EnderecoDTO enderecoDTO, @PathVariable Long id) {
+        var enderecoAtualizado = enderecoService.atualizar(id, enderecoDTO);
         return ResponseEntity.ok(enderecoAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id){
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
         enderecoService.remover(id);
         return ResponseEntity.noContent().build();
     }
